@@ -21,18 +21,21 @@ public class SayHelloController {
         return sayHelloService.sayhello();
     }
 
-    @RequestMapping("/adduser")
+    @RequestMapping("/addUser")
     public int addUser(@RequestParam("name")String name, @RequestParam("age")String age){
         return redisService.addUser(name, age);
     }
+
     @RequestMapping("/findUser")
     public User findUser(@RequestParam("id") String id){
-        return redisService.findById(id);
+
+        return redisService.findById(Integer.parseInt(id));
     }
+
     @RequestMapping("/updataById")
     public String updataById(@RequestParam("id") String id,@RequestParam("name") String name){
         try {
-            redisService.updataById(id, name);
+            redisService.updataById(Integer.parseInt(id), name);
         } catch (Exception e) {
             return "error";
         }
@@ -42,7 +45,7 @@ public class SayHelloController {
     @RequestMapping("/deleteById")
     public String deleteById(@RequestParam("id") String id){
         try {
-            redisService.deleteById(id);
+            redisService.deleteById(Integer.parseInt(id));
         } catch (Exception e) {
             return "error";
         }
