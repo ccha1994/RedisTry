@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 @RestController
 public class SayHelloController {
@@ -15,6 +16,7 @@ public class SayHelloController {
     private SayHelloService sayHelloService;
 
     @Resource RedisService redisService;
+
 
     @RequestMapping("/hello")
     public String sayHello(){
@@ -30,6 +32,12 @@ public class SayHelloController {
     public User findUser(@RequestParam("id") String id){
 
         return redisService.findById(Integer.parseInt(id));
+    }
+
+    @RequestMapping("/findAll")
+    public List<User> findUser(){
+
+        return redisService.findAll();
     }
 
     @RequestMapping("/updataById")
@@ -51,4 +59,5 @@ public class SayHelloController {
         }
         return "success";
     }
+
 }

@@ -5,6 +5,8 @@ import org.apache.ibatis.annotations.*;
 import org.springframework.cache.annotation.*;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Mapper
 @Repository
 @CacheConfig(cacheNames = "users")
@@ -16,6 +18,9 @@ public interface UserMapper {
     @Select("select * from user where id = #{uid}")
     @Cacheable(key = "#p0")
     User findById(@Param("uid") Integer id);
+
+    @Select("select * from user where 1=1")
+    List<User> findAll();
 
     @Update("update user set name=#{name} where id=#{id}")
     @CachePut(key = "#p0")
