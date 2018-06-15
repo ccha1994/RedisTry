@@ -12,22 +12,24 @@ import java.util.List;
 @CacheConfig(cacheNames = "users")
 public interface UserMapper {
     @Insert("insert into user( name , age ) values( #{name} , #{age})")
+    @CachePut
     //@Options(useGeneratedKeys = true, keyProperty = "id")
     int addUser(@Param("name") String name,@Param("age") String age);
 
     @Select("select * from user where id = #{uid}")
-    @Cacheable(key = "#p0")
+    @Cacheable
     User findById(@Param("uid") Integer id);
 
     @Select("select * from user where 1=1")
+    @Cacheable
     List<User> findAll();
 
     @Update("update user set name=#{name} where id=#{id}")
-    @CachePut(key = "#p0")
+    @CachePut
     void updataById(@Param("id")Integer uid,@Param("name")String uname);
 
     //如果指定为 true，则方法调用后将立即清空所有缓存
     @Delete("delete from user where id=#{id}")
-    @CacheEvict(key = "#p0",allEntries = true)
+    @CacheEvict(allEntries = true)
     void deleteById(@Param("id")Integer id);
 }
