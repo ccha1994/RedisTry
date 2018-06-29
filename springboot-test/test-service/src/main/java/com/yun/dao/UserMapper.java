@@ -13,23 +13,27 @@ import java.util.List;
 public interface UserMapper {
     @Insert("insert into user( name , age ) values( #{name} , #{age})")
     @CachePut
-    //@Options(useGeneratedKeys = true, keyProperty = "id")
-    int addUser(@Param("name") String name,@Param("age") String age);
+    @Options(useGeneratedKeys = true)
+    int addUser(User user);
 
-    @Select("select * from user where id = #{uid}")
-    @Cacheable
-    User findById(@Param("uid") Integer id);
+    @Select("select * from user where id = #{id}")
+    //@Cacheable(key="#p0")
+    @MyCacheAble(key = "'userCache:userId.' + #id")
+    User findById(@Param("id") Integer id);
 
     @Select("select * from user where 1=1")
     @Cacheable
     List<User> findAll();
 
     @Update("update user set name=#{name} where id=#{id}")
-    @CachePut
-    void updataById(@Param("id")Integer uid,@Param("name")String uname);
+    @CachePut(key="#p0")
+    void updataById(@Param("id")Integer id,@Param("name")String name);
 
-    //如果指定为 true，则方法调用后将立即清空所有缓存
+    /**
+     * 如果指定为 true，则方法调用后将立即清空所有缓存
+     */
     @Delete("delete from user where id=#{id}")
-    @CacheEvict(allEntries = true)
+    //@CacheEvict(allEntries = true)
+    @MyCacheEvict(key = "'userCache:userId.' + #id")
     void deleteById(@Param("id")Integer id);
 }

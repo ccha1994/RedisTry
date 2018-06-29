@@ -14,9 +14,9 @@ public class RedisService    {
     @Resource
     private UserMapper userMapper;
 
-    public int addUser(String names,String ages){
+    public int addUser(User user){
 
-        return userMapper.addUser(names,ages);
+        return userMapper.addUser(user);
     }
 
     public User findById(Integer ids){

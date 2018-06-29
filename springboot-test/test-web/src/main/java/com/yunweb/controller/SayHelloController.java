@@ -3,12 +3,16 @@ package com.yunweb.controller;
 import com.yun.service.RedisService;
 import com.yun.service.SayHelloService;
 import com.yun.domain.User;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.Resource;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 public class SayHelloController {
@@ -25,7 +29,12 @@ public class SayHelloController {
 
     @RequestMapping("/addUser")
     public int addUser(@RequestParam("name")String name, @RequestParam("age")String age){
-        return redisService.addUser(name, age);
+        User user = new User();
+        user.setName(name);
+        user.setAge(age);
+        redisService.addUser(user);
+        int id = user.getId();
+        return id;
     }
 
     @RequestMapping("/findUser")
