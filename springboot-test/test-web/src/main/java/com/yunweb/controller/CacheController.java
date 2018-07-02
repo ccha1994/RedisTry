@@ -1,6 +1,6 @@
 package com.yunweb.controller;
 
-import com.yunweb.utils.Cache;
+import com.yun.util.Cache;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 

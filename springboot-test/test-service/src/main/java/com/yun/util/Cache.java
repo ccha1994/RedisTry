@@ -1,6 +1,7 @@
-package com.yunweb.utils;
+package com.yun.util;
 
 import org.springframework.stereotype.Component;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
@@ -33,6 +34,7 @@ public class Cache {
         }
     }
 
+    @RequestMapping("/listCache")
     public String listAll() {
         return cache.toString();
     }

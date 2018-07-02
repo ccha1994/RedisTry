@@ -3,6 +3,8 @@ package com.yunweb.controller;
 import com.yun.service.RedisService;
 import com.yun.service.SayHelloService;
 import com.yun.domain.User;
+import com.yun.util.MyCacheAble;
+import com.yun.util.MyCacheEvict;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -38,6 +40,7 @@ public class SayHelloController {
     }
 
     @RequestMapping("/findUser")
+    @MyCacheAble(key = "'userCache:userId.' + #id")
     public User findUser(@RequestParam("id") String id){
 
         return redisService.findById(Integer.parseInt(id));
@@ -60,6 +63,7 @@ public class SayHelloController {
     }
 
     @RequestMapping("/deleteById")
+    @MyCacheEvict(key = "'userCache:userId.' + #id")
     public String deleteById(@RequestParam("id") String id){
         try {
             redisService.deleteById(Integer.parseInt(id));
