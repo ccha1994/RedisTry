@@ -2,6 +2,7 @@ package com.yun.service;
 
 import com.yun.dao.UserMapper;
 import com.yun.domain.User;
+import com.yun.util.MyCacheAble;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;

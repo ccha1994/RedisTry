@@ -40,7 +40,7 @@ public class SayHelloController {
     }
 
     @RequestMapping("/findUser")
-    @MyCacheAble(key = "'userCache:userId.' + #id")
+    //@MyCacheAble(key = "'userCache:userId.' + #id")
     public User findUser(@RequestParam("id") String id){
 
         return redisService.findById(Integer.parseInt(id));
@@ -53,6 +53,7 @@ public class SayHelloController {
     }
 
     @RequestMapping("/updataById")
+    @MyCacheEvict(key = "'userCache:userId.' + #id")
     public String updataById(@RequestParam("id") String id,@RequestParam("name") String name){
         try {
             redisService.updataById(Integer.parseInt(id), name);

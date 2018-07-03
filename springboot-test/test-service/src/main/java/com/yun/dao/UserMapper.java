@@ -20,7 +20,7 @@ public interface UserMapper {
     int addUser(User user);
 
     @Select("select * from user where id = #{id}")
-    //@Cacheable(key="#p0")
+    @Cacheable(key="#p0")
     User findById(@Param("id") Integer id);
 
     @Select("select * from user where 1=1")
