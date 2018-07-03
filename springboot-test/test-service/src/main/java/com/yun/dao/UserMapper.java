@@ -31,10 +31,7 @@ public interface UserMapper {
     @CacheEvict(key="#p0")
     void updataById(@Param("id")Integer id,@Param("name")String name);
 
-    /**
-     * 如果指定为 true，则方法调用后将立即清空所有缓存
-     */
     @Delete("delete from user where id=#{id}")
-    //@CacheEvict(allEntries = true)
+    @CacheEvict(key="#p0")
     void deleteById(@Param("id")Integer id);
 }
