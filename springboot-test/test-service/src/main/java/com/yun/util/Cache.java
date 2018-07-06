@@ -23,7 +23,7 @@ public class Cache {
     }
 
     public void put(String key, Object obj) {
-        if(null != key && null != obj) {
+        if (null != key && null != obj) {
             cache.put(key, obj);
         }
     }

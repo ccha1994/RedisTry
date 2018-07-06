@@ -40,10 +40,16 @@ public class SayHelloController {
     }
 
     @RequestMapping("/findUser")
-    //@MyCacheAble(key = "'userCache:userId.' + #id")
+    @MyCacheAble(key = "'userCache:userId.' + #id")
     public User findUser(@RequestParam("id") String id){
 
         return redisService.findById(Integer.parseInt(id));
+    }
+
+    @RequestMapping("/findUser2")
+    public User findUser2(@RequestParam("id") String id){
+
+        return redisService.findById2(Integer.parseInt(id));
     }
 
     @RequestMapping("/findAll")

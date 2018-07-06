@@ -36,6 +36,7 @@ public class CacheAspect {
      */
     @Around("execution(@MyCacheAble * *.*(..)) && @annotation(cacheable)")
     public Object aroundCacheable(ProceedingJoinPoint joinPoint, MyCacheAble cacheable) throws Throwable {
+        System.out.println("come in aop!!!");
         String key; //缓存key
         if (cacheable.key().equals("")) {
             //根据方法签名生成key
